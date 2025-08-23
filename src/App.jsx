@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <div>
-      <Section title="Будь ласка, залиште відгук">
+      <Section title="залиште відгук">
         <FeedbackOptions
           options={["good", "neutral", "bad"]}
           onLeaveFeedback={handleFeedback}

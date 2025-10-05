@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hwreact-16/static/css/main.f6f56ccb.css",
+    "main.js": "/hwreact-16/static/js/main.5db890be.js",
+    "index.html": "/hwreact-16/index.html",
+    "main.f6f56ccb.css.map": "/hwreact-16/static/css/main.f6f56ccb.css.map",
+    "main.5db890be.js.map": "/hwreact-16/static/js/main.5db890be.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f6f56ccb.css",
+    "static/js/main.5db890be.js"
+  ]
+}

@@ -1,20 +1,13 @@
-import React, { useState } from "react";
 import "./App.css";
+import {Section, Statistics, FeedbackOptions, Notification} from "./components";
+import { useState, useEffect} from "react";
 
-import {
-  Section,
-  Statistics,
-  FeedbackOptions,
-  Notification,
-} from "./components";
-
-export default function App() {
+const App = () => {
   const [state, setState] = useState({
     good: 0,
     neutral: 0,
     bad: 0,
   });
-
   const handleFeedback = (type) => {
     setState((prevState) => ({
       ...prevState,
@@ -55,4 +48,5 @@ export default function App() {
       </Section>
     </div>
   );
-}
+};
+export default App;

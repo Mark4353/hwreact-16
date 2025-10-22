@@ -1,6 +1,12 @@
 import "./App.css";
-import {Section, Statistics, FeedbackOptions, Notification} from "./components";
-import { useState, useEffect} from "react";
+import {
+  Section,
+  Statistics,
+  FeedbackOptions,
+  Notification,
+  FeedbackContext,
+} from "./components";
+import { useState, useEffect, useRef } from "react";
 
 const App = () => {
   const [state, setState] = useState({
@@ -8,6 +14,7 @@ const App = () => {
     neutral: 0,
     bad: 0,
   });
+
   const handleFeedback = (type) => {
     setState((prevState) => ({
       ...prevState,
@@ -24,29 +31,38 @@ const App = () => {
     return total ? Math.round((state.good / total) * 100) : 0;
   };
 
-  return (
-    <div>
-      <Section title="залиште відгук">
-        <FeedbackOptions
-          options={["good", "neutral", "bad"]}
-          onLeaveFeedback={handleFeedback}
-        />
-      </Section>
+  const firstButtonRef = useRef(null);
 
-      <Section title="Статистика">
-        {countTotalFeedback() > 0 ? (
-          <Statistics
-            good={state.good}
-            neutral={state.neutral}
-            bad={state.bad}
-            total={countTotalFeedback()}
-            positivePercentage={countPositiveFeedbackPercentage()}
+  useEffect(() => {
+    // фокусуємо першу кнопку при маунті
+    firstButtonRef.current?.focus();
+  }, []);
+
+  return (
+    <FeedbackContext.Provider value={{ state, handleFeedback }}>
+      <div>
+        <Section title="залиште відгук">
+          <FeedbackOptions
+            options={["good", "neutral", "bad"]}
+            ref={firstButtonRef}
           />
-        ) : (
-          <Notification message="There is no feedback" />
-        )}
-      </Section>
-    </div>
+        </Section>
+
+        <Section title="Статистика">
+          {countTotalFeedback() > 0 ? (
+            <Statistics
+              good={state.good}
+              neutral={state.neutral}
+              bad={state.bad}
+              total={countTotalFeedback()}
+              positivePercentage={countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
+        </Section>
+      </div>
+    </FeedbackContext.Provider>
   );
 };
 export default App;

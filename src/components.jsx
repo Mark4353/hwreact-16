@@ -1,5 +1,7 @@
 import React from "react";
 
+export const FeedbackContext = React.createContext(null);
+
 export function Section({ title, children }) {
   return (
     <section>
@@ -9,17 +11,26 @@ export function Section({ title, children }) {
   );
 }
 
-export function FeedbackOptions({ options, onLeaveFeedback }) {
+export const FeedbackOptions = React.forwardRef(function FeedbackOptions(
+  { options },
+  ref
+) {
+  const { handleFeedback } = React.useContext(FeedbackContext);
+
   return (
     <div>
-      {options.map((option) => (
-        <button key={option} onClick={() => onLeaveFeedback(option)}>
+      {options.map((option, idx) => (
+        <button
+          key={option}
+          ref={idx === 0 ? ref : null}
+          onClick={() => handleFeedback(option)}
+        >
           {option}
         </button>
       ))}
     </div>
   );
-}
+});
 
 export function Statistics({ good, neutral, bad, total, positivePercentage }) {
   return (

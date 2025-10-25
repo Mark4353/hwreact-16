@@ -33,11 +33,6 @@ const App = () => {
 
   const firstButtonRef = useRef(null);
 
-  useEffect(() => {
-    // фокусуємо першу кнопку при маунті
-    firstButtonRef.current?.focus();
-  }, []);
-
   return (
     <FeedbackContext.Provider value={{ state, handleFeedback }}>
       <div>
